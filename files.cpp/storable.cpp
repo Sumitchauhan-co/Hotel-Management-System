@@ -82,7 +82,8 @@ void Storable::toString_orderBill()
             out << "\"" << itemName[i] << "\","
                 << to_string(itemPrice[i]) << ","
                 << to_string(orderedQty[i]) << ","
-                << to_string(itemQty[i]) << "\n";
+                << to_string(itemQty[i]) << ","
+                << "\"" << sold[i] << "\"\n";
         }
     }
     out.close();
@@ -243,18 +244,29 @@ void Storable::fromString_room()
         {
             // Convert other strings to int
             int roomNo = stoi(roomNumStr);
+            cout<<"-2";
             int costNum = stoi(costStr);
+            cout<<"-1";
             int durationNum = stoi(durationStr);
+            cout<<"0";
 
             // Push to vectors
             roomNum[i] = roomNo;
+            cout<<"1";
             Ac[i] = acQuoted;
+            cout<<"2";
             foodService[i] = foodQuoted;
+            cout<<"3";
             laundryService[i] = laundryQuoted;
-            booked[i] = bookedQuoted;
+            cout<<"4";
             cost[i] = costNum;
+            cout<<"5";
+            booked[i] = bookedQuoted;
+            cout<<"6";
             duration[i] = durationNum;
+            cout<<"7";
             specialService[i] = specialQuoted;
+            cout<<"8";
             i++;
         }
         catch (...)
@@ -278,13 +290,14 @@ void Storable::fromString_orderBill()
     while (getline(in, line))
     {
         istringstream iss(line);
-        string itemQuoted, priceStr, orderedStr, qtyStr;
+        string itemQuoted, soldQuoted, priceStr, orderedStr, qtyStr;
 
         // Read comma-separated values
         getline(iss, itemQuoted, ',');
         getline(iss, priceStr, ',');
         getline(iss, orderedStr, ',');
-        getline(iss, qtyStr);
+        getline(iss, qtyStr, ',');
+        getline(iss, soldQuoted);
 
         // Remove quotes from name
         if (itemQuoted.front() == '"')
@@ -294,6 +307,15 @@ void Storable::fromString_orderBill()
         if (itemQuoted.back() == '"')
         {
             itemQuoted.pop_back();
+        }
+
+        if (soldQuoted.front() == '"')
+        {
+            soldQuoted.erase(0, 1);
+        }
+        if (soldQuoted.back() == '"')
+        {
+            soldQuoted.pop_back();
         }
 
         try
@@ -308,6 +330,7 @@ void Storable::fromString_orderBill()
             itemPrice[i] = priceNum;
             orderedQty[i] = orderedNum;
             itemQty[i] = qtyNum;
+            sold[i] = soldQuoted;
             i++;
         }
         catch (...)

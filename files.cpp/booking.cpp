@@ -15,12 +15,8 @@ void Booking::entry()
             cout << "\nYour room number is : " << roomNum[i] << endl;
             break;
         }
-        else
-        {
-            cout << "\n\nSorry, we dont have any rooms avaialable right now, please check later :( \n";
-            break;
-        }
     }
+    cout << "\n\nSorry, we dont have any rooms avaialable right now, please check later :( \n";
 }
 
 void Booking::display_book()
@@ -179,6 +175,7 @@ void Booking::food()
             continue;
         }
 
+        string choice;
         bool found = false;
 
         for (size_t i = 0; i < itemName.size(); i++)
@@ -193,7 +190,6 @@ void Booking::food()
                 cout << "\nTotal price : " << itemPrice[i] * qty;
                 cout << "\nConfirm the order?(yes/no) : ";
 
-                string choice;
                 errorHandling::input(choice);
 
                 transform(choice.begin(), choice.end(), choice.begin(), ::tolower);
@@ -209,12 +205,17 @@ void Booking::food()
                     found = true;
                     break;
                 }
+                else{
+                    break;
+                }
             }
         }
-
+        if(choice != "yes"){
+            continue;
+        }
         if (!found)
         {
-            cout << "\n\nSorry, " << item << " : " << qty << " is currently not available on us";
+            cout << "\n\nSorry, " << item << " : " << qty << " is currently not available on us\n";
             continue;
         }
         
