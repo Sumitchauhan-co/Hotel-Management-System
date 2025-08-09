@@ -244,7 +244,6 @@ void Storable::fromString_orderBill()
     }
 
     string line;
-    size_t i = 0;
 
     while (getline(in, line))
     {
