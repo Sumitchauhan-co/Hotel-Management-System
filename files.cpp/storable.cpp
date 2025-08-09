@@ -168,6 +168,7 @@ void Storable::fromString_customer()
             contact[i] = contactStr;
             ID[i] = idStr;
             roomNum[i] = room;
+            
             i++;
         }
         catch (const exception& e) {
@@ -180,6 +181,7 @@ void Storable::fromString_customer()
 
 void Storable::fromString_room()
 {
+    getdata_room(); //sets initialisation
     ifstream in("./files.txt/room.txt");
     if (!in) return;
 
@@ -205,10 +207,12 @@ void Storable::fromString_room()
         getline(iss, specialQuoted);
 
         try {
+            // Convert other strings to int
             int roomNo = stoi(roomNumStr);
             int costNum = stoi(costStr);
             int durationNum = stoi(durationStr);
 
+            // Push to vectors
             Ac[i] = acQuoted;
             foodService[i] = foodQuoted;
             laundryService[i] = laundryQuoted;
@@ -287,6 +291,7 @@ void Storable::fromString_orderBill()
             orderedQty[i] = orderedNum;
             itemQty[i] = qtyNum;
             sold[i] = soldQuoted;
+
             i++;
         }
         catch (const exception& e) {
@@ -345,6 +350,8 @@ void Storable::fromString_roomBill()
             name[i] = nameQuoted;
             roomNum[i] = roomNo;
             amt[i] = amtNum;
+
+            i++;
         }
         catch (const exception& e) {
             cout << "Skipping bad data: " << e.what() << " in line: " << line << "\n";
