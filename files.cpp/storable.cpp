@@ -221,6 +221,7 @@ void Storable::fromString_room()
             foodService[i] = foodQuoted;
             laundryService[i] = laundryQuoted;
             booked[i] = bookedQuoted;
+            cout<<i<<":"<<booked[i]<<endl;
             specialService[i] = specialQuoted;
             roomNum[i] = roomNo;
             cost[i] = costNum;
@@ -306,8 +307,6 @@ void Storable::fromString_orderBill()
         getline(iss, itemQuoted, ',');
         getline(iss, priceStr, ',');
         getline(iss, orderedStr, ',');
-        cout<<itemQuoted<<endl;
-        cout<<orderedStr<<endl;
 
         if (itemQuoted.front() == '"')
         {
@@ -318,19 +317,15 @@ void Storable::fromString_orderBill()
             itemQuoted.pop_back();
         }
 
-        cout<<itemQuoted<<endl;
         if (!itemQuoted.empty()) {
             // Match with default list
             for (size_t i = 0; i < itemName.size(); i++) {
                 if (itemName[i] == itemQuoted) {
                     itemQty[i] -= stoi(orderedStr);
-                    cout<<"1"<<endl;
                     break;
                 }
-                cout<<"2"<<endl;
             }
         }
-        cout<<"3"<<endl;
     }
     in.close();
 }
