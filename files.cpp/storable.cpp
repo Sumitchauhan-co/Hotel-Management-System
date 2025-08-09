@@ -215,6 +215,7 @@ void Storable::fromString_room()
             int durationNum = stoi(durationStr);
 
             i = roomNo - 1;
+            cout<<roomNo<<endl;
 
             // Push to vectors
             Ac[i] = acQuoted;
@@ -224,6 +225,7 @@ void Storable::fromString_room()
             cout<<i<<":"<<booked[i]<<endl;
             specialService[i] = specialQuoted;
             roomNum[i] = roomNo;
+            cout<<i<<":"<<roomNum[i]<<endl;
             cost[i] = costNum;
             duration[i] = durationNum;
         }
