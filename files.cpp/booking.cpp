@@ -13,7 +13,7 @@ void Booking::entry()
         {
             cout << "\nHello! Your heartedly welcome on the Parasite Hotel of Sumit :D \n";
             cout << "\nYour room number is : " << roomNum[i] << endl;
-            break;
+            return;
         }
     }
     cout << "\n\nSorry, we dont have any rooms avaialable right now, please check later :( \n";

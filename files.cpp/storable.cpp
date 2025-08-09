@@ -239,40 +239,33 @@ void Storable::fromString_room()
         {
             specialQuoted.pop_back();
         }
+        cout<<"-3";
+        // Convert other strings to int
+        int roomNo = stoi(roomNumStr);
+        cout<<"-2";
+        int costNum = stoi(costStr);
+        cout<<"-1";
+        int durationNum = stoi(durationStr);
+        cout<<"0";
 
-        try
-        {
-            // Convert other strings to int
-            int roomNo = stoi(roomNumStr);
-            cout<<"-2";
-            int costNum = stoi(costStr);
-            cout<<"-1";
-            int durationNum = stoi(durationStr);
-            cout<<"0";
-
-            // Push to vectors
-            roomNum[i] = roomNo;
-            cout<<"1";
-            Ac[i] = acQuoted;
-            cout<<"2";
-            foodService[i] = foodQuoted;
-            cout<<"3";
-            laundryService[i] = laundryQuoted;
-            cout<<"4";
-            cost[i] = costNum;
-            cout<<"5";
-            booked[i] = bookedQuoted;
-            cout<<"6";
-            duration[i] = durationNum;
-            cout<<"7";
-            specialService[i] = specialQuoted;
-            cout<<"8";
-            i++;
-        }
-        catch (...)
-        {
-            cout << "Invalid room data, skipping...\n";
-        }
+        // Push to vectors
+        roomNum[i] = roomNo;
+        cout<<"1";
+        Ac[i] = acQuoted;
+        cout<<"2";
+        foodService[i] = foodQuoted;
+        cout<<"3";
+        laundryService[i] = laundryQuoted;
+        cout<<"4";
+        cost[i] = costNum;
+        cout<<"5";
+        booked[i] = bookedQuoted;
+        cout<<"6";
+        duration[i] = durationNum;
+        cout<<"7";
+        specialService[i] = specialQuoted;
+        cout<<"8";
+        i++;
     }
     in.close();
 }
