@@ -318,7 +318,7 @@ void Storable::fromString_orderBill()
             itemQuoted.pop_back();
         }
 
-        cout<<orderedStr<<endl;
+        cout<<itemQuoted<<endl;
         if (!itemQuoted.empty()) {
             // Match with default list
             for (size_t i = 0; i < itemName.size(); i++) {
