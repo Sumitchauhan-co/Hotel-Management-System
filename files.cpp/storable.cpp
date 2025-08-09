@@ -176,22 +176,19 @@ void Storable::fromString_customer()
 
 void Storable::fromString_room()
 {
-    getdata_room(); // sets initialisation
     ifstream in("./files.txt/room.txt");
-
-    if (!in)
-        return;
+    if (!in) return;
 
     string line;
     int i = 0;
 
     while (getline(in, line))
     {
-        istringstream iss(line);
-        string acQuoted, foodQuoted, laundryQuoted, bookedQuoted, specialQuoted;
-        string roomNumStr, costStr, durationStr;
+        if (line.empty()) continue; // skip blank lines
 
-        // Read comma-separated values
+        istringstream iss(line);
+        string roomNumStr, acQuoted, foodQuoted, laundryQuoted, costStr, bookedQuoted, durationStr, specialQuoted;
+
         getline(iss, roomNumStr, ',');
         getline(iss, acQuoted, ',');
         getline(iss, foodQuoted, ',');
@@ -201,73 +198,131 @@ void Storable::fromString_room()
         getline(iss, durationStr, ',');
         getline(iss, specialQuoted);
 
-        // Remove quotes from name
-        if (acQuoted.front() == '"')
-        {
-            acQuoted.erase(0, 1);
-        }
-        if (acQuoted.back() == '"')
-        {
-            acQuoted.pop_back();
-        }
-        if (foodQuoted.front() == '"')
-        {
-            foodQuoted.erase(0, 1);
-        }
-        if (foodQuoted.back() == '"')
-        {
-            foodQuoted.pop_back();
-        }
-        if (laundryQuoted.front() == '"')
-        {
-            laundryQuoted.erase(0, 1);
-        }
-        if (laundryQuoted.back() == '"')
-        {
-            laundryQuoted.pop_back();
-        }
-        if (bookedQuoted.front() == '"')
-        {
-            bookedQuoted.erase(0, 1);
-        }
-        if (bookedQuoted.back() == '"')
-        {
-            bookedQuoted.pop_back();
-        }
-        if (specialQuoted.front() == '"')
-        {
-            specialQuoted.erase(0, 1);
-        }
-        if (specialQuoted.back() == '"')
-        {
-            specialQuoted.pop_back();
+        // If any required numeric field is empty, skip this record
+        if (roomNumStr.empty() || costStr.empty() || durationStr.empty()) {
+            cout << "Skipping invalid or incomplete line: " << line << "\n";
+            continue;
         }
 
-        try
-        {
-            // Convert other strings to int
+        try {
             int roomNo = stoi(roomNumStr);
             int costNum = stoi(costStr);
             int durationNum = stoi(durationStr);
 
-            // Push to vectors
-            roomNum[i] = roomNo;
             Ac[i] = acQuoted;
             foodService[i] = foodQuoted;
             laundryService[i] = laundryQuoted;
-            cost[i] = costNum;
             booked[i] = bookedQuoted;
-            duration[i] = durationNum;
             specialService[i] = specialQuoted;
+            roomNum[i] = roomNo;
+            cost[i] = costNum;
+            duration[i] = durationNum;
+
             i++;
         }
-        catch (...)
-        { 
-            cout << "Invalid room data, skipping...\n";
+        catch (const exception& e) {
+            cout << "Skipping bad data: " << e.what() << " in line: " << line << "\n";
+            continue;
         }
     }
     in.close();
 }
+
+
+// void Storable::fromString_room()
+// {
+//     getdata_room(); // sets initialisation
+//     ifstream in("./files.txt/room.txt");
+
+//     if (!in)
+//         return;
+
+//     string line;
+//     int i = 0;
+
+//     while (getline(in, line))
+//     {
+//         istringstream iss(line);
+//         string acQuoted, foodQuoted, laundryQuoted, bookedQuoted, specialQuoted;
+//         string roomNumStr, costStr, durationStr;
+
+//         // Read comma-separated values
+//         getline(iss, roomNumStr, ',');
+//         getline(iss, acQuoted, ',');
+//         getline(iss, foodQuoted, ',');
+//         getline(iss, laundryQuoted, ',');
+//         getline(iss, costStr, ',');
+//         getline(iss, bookedQuoted, ',');
+//         getline(iss, durationStr, ',');
+//         getline(iss, specialQuoted);
+
+//         // Remove quotes from name
+//         if (acQuoted.front() == '"')
+//         {
+//             acQuoted.erase(0, 1);
+//         }
+//         if (acQuoted.back() == '"')
+//         {
+//             acQuoted.pop_back();
+//         }
+//         if (foodQuoted.front() == '"')
+//         {
+//             foodQuoted.erase(0, 1);
+//         }
+//         if (foodQuoted.back() == '"')
+//         {
+//             foodQuoted.pop_back();
+//         }
+//         if (laundryQuoted.front() == '"')
+//         {
+//             laundryQuoted.erase(0, 1);
+//         }
+//         if (laundryQuoted.back() == '"')
+//         {
+//             laundryQuoted.pop_back();
+//         }
+//         if (bookedQuoted.front() == '"')
+//         {
+//             bookedQuoted.erase(0, 1);
+//         }
+//         if (bookedQuoted.back() == '"')
+//         {
+//             bookedQuoted.pop_back();
+//         }
+//         if (specialQuoted.front() == '"')
+//         {
+//             specialQuoted.erase(0, 1);
+//         }
+//         if (specialQuoted.back() == '"')
+//         {
+//             specialQuoted.pop_back();
+//         }
+
+//         try
+//         {
+//             // Convert other strings to int
+//             int roomNo = stoi(roomNumStr);
+//             int costNum = stoi(costStr);
+//             int durationNum = stoi(durationStr);
+
+//             // Push to vectors
+//             roomNum[i] = roomNo;
+//             Ac[i] = acQuoted;
+//             foodService[i] = foodQuoted;
+//             laundryService[i] = laundryQuoted;
+//             cost[i] = costNum;
+//             booked[i] = bookedQuoted;
+//             duration[i] = durationNum;
+//             specialService[i] = specialQuoted;
+//             i++;
+//         }
+//         catch (...)
+//         { 
+//             cout << "Invalid room data, skipping...\n";
+//         }
+//     }
+//     in.close();
+// }
 
 void Storable::fromString_orderBill()
 {
