@@ -168,7 +168,7 @@ void Storable::fromString_customer()
             contact[i] = contactStr;
             ID[i] = idStr;
             roomNum[i] = room;
-            
+
             i++;
         }
         catch (const exception& e) {
@@ -183,10 +183,12 @@ void Storable::fromString_room()
 {
     getdata_room(); //sets initialisation
     ifstream in("./files.txt/room.txt");
-    if (!in) return;
+    if (!in){
+        return;
+    }
 
     string line;
-    int i = 0;
+    int i;
 
     while (getline(in, line))
     {
@@ -212,6 +214,8 @@ void Storable::fromString_room()
             int costNum = stoi(costStr);
             int durationNum = stoi(durationStr);
 
+            i = roomNo - 1;
+
             // Push to vectors
             Ac[i] = acQuoted;
             foodService[i] = foodQuoted;
@@ -221,8 +225,6 @@ void Storable::fromString_room()
             roomNum[i] = roomNo;
             cost[i] = costNum;
             duration[i] = durationNum;
-
-            i++;
         }
         catch (const exception& e) {
             cout << "Skipping bad data: " << e.what() << " in line: " << line << "\n";
@@ -237,8 +239,9 @@ void Storable::fromString_orderBill()
     getdata_order(); // sets initialisation
     ifstream in("files.txt/order.txt");
 
-    if (!in)
+    if (!in){
         return;
+    }
 
     string line;
     int i = 0;
@@ -298,6 +301,23 @@ void Storable::fromString_orderBill()
             cout << "Skipping bad data: " << e.what() << " in line: " << line << "\n";
             continue;
         }
+
+        // string itemName, priceStr, qtyStr ;
+
+        // getline(iss, itemName, ',');
+        // getline(iss, priceStr, ',');
+        // getline(iss, qtyStr);
+
+        // if (!itemName.empty()) {
+        //     // Match with default list
+        //     for (size_t i = 0; i < item.size(); i++) {
+        //         if (item[i] == itemName) {
+        //             price[i] = stoi(priceStr);
+        //             quantity[i] = stoi(qtyStr);
+        //             break;
+        //         }
+        //     }
+        // }
     }
     in.close();
 }
@@ -306,8 +326,9 @@ void Storable::fromString_roomBill()
 {
     ifstream in("./files.txt/billManager.txt");
 
-    if (!in)
+    if (!in){
         return;
+    }
 
     string line;
     int i = 0;
