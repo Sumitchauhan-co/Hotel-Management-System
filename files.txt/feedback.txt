@@ -1,1 +1,0 @@
-"issue : invalid room data error throw on each execution after first initialisation of hotel data"
