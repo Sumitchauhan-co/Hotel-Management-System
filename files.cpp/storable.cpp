@@ -253,71 +253,70 @@ void Storable::fromString_orderBill()
         }
 
         istringstream iss(line);
-        string itemQuoted, soldQuoted, priceStr, orderedStr, qtyStr;
+        // string itemQuoted, soldQuoted, priceStr, orderedStr, qtyStr;
 
-        // Read comma-separated values
-        getline(iss, itemQuoted, ',');
+        // // Read comma-separated values
+        // getline(iss, itemQuoted, ',');
+        // getline(iss, priceStr, ',');
+        // getline(iss, orderedStr, ',');
+        // getline(iss, qtyStr, ',');
+        // getline(iss, soldQuoted);
+
+        // // Remove quotes from name
+        // if (itemQuoted.front() == '"')
+        // {
+        //     itemQuoted.erase(0, 1);
+        // }
+        // if (itemQuoted.back() == '"')
+        // {
+        //     itemQuoted.pop_back();
+        // }
+
+        // if (soldQuoted.front() == '"')
+        // {
+        //     soldQuoted.erase(0, 1);
+        // }
+        // if (soldQuoted.back() == '"')
+        // {
+        //     soldQuoted.pop_back();
+        // }
+
+        // try
+        // {
+        //     // Convert other strings to int
+        //     int priceNum = stoi(priceStr);
+        //     int orderedNum = stoi(orderedStr);
+        //     int qtyNum = stoi(qtyStr);
+
+        //     // Push to vectors
+        //     itemName[i] = itemQuoted;
+        //     itemPrice[i] = priceNum;
+        //     orderedQty[i] = orderedNum;
+        //     itemQty[i] = qtyNum;
+        //     sold[i] = soldQuoted;
+
+        //     i++;
+        // }
+        // catch (const exception& e) {
+        //     cout << "Skipping bad data: " << e.what() << " in line: " << line << "\n";
+        //     continue;
+        // }
+
+        string item, priceStr, orderedStr ;
+
+        getline(iss, item, ',');
         getline(iss, priceStr, ',');
         getline(iss, orderedStr, ',');
-        getline(iss, qtyStr, ',');
-        getline(iss, soldQuoted);
 
-        // Remove quotes from name
-        if (itemQuoted.front() == '"')
-        {
-            itemQuoted.erase(0, 1);
+        if (!item.empty()) {
+            // Match with default list
+            for (size_t i = 0; i < itemName.size(); i++) {
+                if (itemName[i] == item) {
+                    itemQty[i] -= stoi(orderedStr);
+                    break;
+                }
+            }
         }
-        if (itemQuoted.back() == '"')
-        {
-            itemQuoted.pop_back();
-        }
-
-        if (soldQuoted.front() == '"')
-        {
-            soldQuoted.erase(0, 1);
-        }
-        if (soldQuoted.back() == '"')
-        {
-            soldQuoted.pop_back();
-        }
-
-        try
-        {
-            // Convert other strings to int
-            int priceNum = stoi(priceStr);
-            int orderedNum = stoi(orderedStr);
-            int qtyNum = stoi(qtyStr);
-
-            // Push to vectors
-            itemName[i] = itemQuoted;
-            itemPrice[i] = priceNum;
-            orderedQty[i] = orderedNum;
-            itemQty[i] = qtyNum;
-            sold[i] = soldQuoted;
-
-            i++;
-        }
-        catch (const exception& e) {
-            cout << "Skipping bad data: " << e.what() << " in line: " << line << "\n";
-            continue;
-        }
-
-        // string itemName, priceStr, qtyStr ;
-
-        // getline(iss, itemName, ',');
-        // getline(iss, priceStr, ',');
-        // getline(iss, qtyStr);
-
-        // if (!itemName.empty()) {
-        //     // Match with default list
-        //     for (size_t i = 0; i < item.size(); i++) {
-        //         if (item[i] == itemName) {
-        //             price[i] = stoi(priceStr);
-        //             quantity[i] = stoi(qtyStr);
-        //             break;
-        //         }
-        //     }
-        // }
     }
     in.close();
 }

@@ -157,7 +157,7 @@ void Booking::food()
         string item;
         int qty;
 
-        cout << "\nChoose from the menu : ";
+        cout << "\nChoose from the menu ->\n";
 
         display_order();
 
