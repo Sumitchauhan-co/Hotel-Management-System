@@ -12,6 +12,7 @@ void Booking::entry()
         if (booked[i] == "No booking yet")
         {
             cout<<i<<":"<<booked[i]<<endl;
+            cout<<i<<":"<<roomNum[i]<<endl;
             cout << "\nHello! Your heartedly welcome on the Parasite Hotel of Sumit :D \n";
             cout << "\nYour room number is : " << roomNum[i] << endl;
             return;
