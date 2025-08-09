@@ -306,6 +306,7 @@ void Storable::fromString_orderBill()
         getline(iss, item, ',');
         getline(iss, priceStr, ',');
         getline(iss, orderedStr, ',');
+        cout<<item<<endl;
 
         if (!item.empty()) {
             // Match with default list
