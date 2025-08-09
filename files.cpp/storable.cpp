@@ -5,7 +5,8 @@
 #include "errorHandling.h"
 using namespace std;
 
-Storable::Storable() {
+Storable::Storable()
+{
     name.resize(50);
     contact.resize(50);
     ID.resize(50);
@@ -106,11 +107,12 @@ void Storable::toString_roomBill()
     out.close();
 }
 
-void Storable::toString_feedback(){
+void Storable::toString_feedback()
+{
 
     ofstream out("files.txt/feedback.txt", ios::app);
 
-    for (const auto& fd : feedBack)
+    for (const auto &fd : feedBack)
     {
         if (!fd.empty())
         {
@@ -174,6 +176,7 @@ void Storable::fromString_customer()
 
 void Storable::fromString_room()
 {
+    getdata_room(); // sets initialisation
     ifstream in("./files.txt/room.txt");
 
     if (!in)
@@ -239,39 +242,36 @@ void Storable::fromString_room()
         {
             specialQuoted.pop_back();
         }
-        cout<<"-3";
-        // Convert other strings to int
-        int roomNo = stoi(roomNumStr);
-        cout<<"-2";
-        int costNum = stoi(costStr);
-        cout<<"-1";
-        int durationNum = stoi(durationStr);
-        cout<<"0";
 
-        // Push to vectors
-        roomNum[i] = roomNo;
-        cout<<"1";
-        Ac[i] = acQuoted;
-        cout<<"2";
-        foodService[i] = foodQuoted;
-        cout<<"3";
-        laundryService[i] = laundryQuoted;
-        cout<<"4";
-        cost[i] = costNum;
-        cout<<"5";
-        booked[i] = bookedQuoted;
-        cout<<"6";
-        duration[i] = durationNum;
-        cout<<"7";
-        specialService[i] = specialQuoted;
-        cout<<"8";
-        i++;
+        try
+        {
+            // Convert other strings to int
+            int roomNo = stoi(roomNumStr);
+            int costNum = stoi(costStr);
+            int durationNum = stoi(durationStr);
+
+            // Push to vectors
+            roomNum[i] = roomNo;
+            Ac[i] = acQuoted;
+            foodService[i] = foodQuoted;
+            laundryService[i] = laundryQuoted;
+            cost[i] = costNum;
+            booked[i] = bookedQuoted;
+            duration[i] = durationNum;
+            specialService[i] = specialQuoted;
+            i++;
+        }
+        catch (...)
+        { 
+            cout << "Invalid room data, skipping...\n";
+        }
     }
     in.close();
 }
 
 void Storable::fromString_orderBill()
 {
+    getdata_order(); // sets initialisation
     ifstream in("files.txt/order.txt");
 
     if (!in)
