@@ -313,10 +313,13 @@ void Storable::fromString_orderBill()
             for (size_t i = 0; i < itemName.size(); i++) {
                 if (itemName[i] == item) {
                     itemQty[i] -= stoi(orderedStr);
+                    cout<<"1"<<endl;
                     break;
                 }
+                cout<<"2"<<endl;
             }
         }
+        cout<<"3"<<endl;
     }
     in.close();
 }
