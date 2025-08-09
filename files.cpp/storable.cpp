@@ -301,17 +301,28 @@ void Storable::fromString_orderBill()
         //     continue;
         // }
 
-        string item, priceStr, orderedStr ;
+        string itemQuoted, priceStr, orderedStr ;
 
-        getline(iss, item, ',');
+        getline(iss, itemQuoted, ',');
         getline(iss, priceStr, ',');
         getline(iss, orderedStr, ',');
-        cout<<item<<endl;
+        cout<<itemQuoted<<endl;
+        cout<<orderedStr<<endl;
 
-        if (!item.empty()) {
+        if (itemQuoted.front() == '"')
+        {
+            itemQuoted.erase(0, 1);
+        }
+        if (itemQuoted.back() == '"')
+        {
+            itemQuoted.pop_back();
+        }
+
+        cout<<orderedStr<<endl;
+        if (!itemQuoted.empty()) {
             // Match with default list
             for (size_t i = 0; i < itemName.size(); i++) {
-                if (itemName[i] == item) {
+                if (itemName[i] == itemQuoted) {
                     itemQty[i] -= stoi(orderedStr);
                     cout<<"1"<<endl;
                     break;
