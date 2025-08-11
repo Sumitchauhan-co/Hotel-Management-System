@@ -121,17 +121,17 @@ void Storable::toString_feedback()
 // lamda function for treaming quotes in input strings
 auto trimQuotes = [](string &s)
 {
-    if (!s.empty())
-    {
-        if (s.front() == '"')
-        {
-            s.erase(0, 1);
-        }
-        if (s.back() == '"')
-        {
-            s.pop_back();
-        }
-    }
+    // if (!s.empty())
+    // {
+    //     if (s.front() == '"')
+    //     {
+    //         s.erase(0, 1);
+    //     }
+    //     if (s.back() == '"')
+    //     {
+    //         s.pop_back();
+    //     }
+    // }
 };
 
 // lamda function for treaming spaces in input strings
