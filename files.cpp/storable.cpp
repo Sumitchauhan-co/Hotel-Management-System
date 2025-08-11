@@ -118,22 +118,6 @@ void Storable::toString_feedback()
     }
 }
 
-// lamda function for treaming quotes in input strings
-auto trimQuotes = [](string &s)
-{
-    // if (!s.empty())
-    // {
-    //     if (s.front() == '"')
-    //     {
-    //         s.erase(0, 1);
-    //     }
-    //     if (s.back() == '"')
-    //     {
-    //         s.pop_back();
-    //     }
-    // }
-};
-
 // lamda function for treaming spaces in input strings
 auto trimSpaces = [](string &s)
 {
@@ -188,8 +172,7 @@ void Storable::fromString_customer()
         getline(iss, idStr, ',');
         getline(iss, roomStr);
 
-        // Remove quotes & spaces
-        trimQuotes(nameQuoted);
+        // Remove spaces
         trimSpaces(nameQuoted);
 
         trimSpaces(contactStr);
@@ -252,26 +235,21 @@ void Storable::fromString_room()
         getline(iss, durationStr, ',');
         getline(iss, specialQuoted);
 
-        // Remove quotes & spaces
+        // Remove spaces
         trimSpaces(roomNumStr);
 
-        trimQuotes(acQuoted);
         trimSpaces(acQuoted);
 
-        trimQuotes(foodQuoted);
         trimSpaces(foodQuoted);
 
-        trimQuotes(laundryQuoted);
         trimSpaces(laundryQuoted);
 
         trimSpaces(costStr);
 
-        trimQuotes(bookedQuoted);
         trimSpaces(bookedQuoted);
 
         trimSpaces(durationStr);
 
-        trimQuotes(specialQuoted);
         trimSpaces(specialQuoted);
 
         try
@@ -329,8 +307,7 @@ void Storable::fromString_orderBill()
         getline(iss, priceStr, ',');
         getline(iss, orderedStr, ',');
 
-        // Remove quotes & spaces
-        trimQuotes(itemQuoted);
+        // Remove spaces
         trimSpaces(itemQuoted);
 
         trimSpaces(priceStr);
@@ -373,26 +350,29 @@ void Storable::fromString_roomBill()
         }
 
         istringstream iss(line); // inputs each line
-        string billIdStr, amtStr, nameQuoted;
+        string billIdStr, roomStr, amtStr, nameQuoted;
 
         // Read comma-separated values
         getline(iss, billIdStr, ',');
         getline(iss, nameQuoted, ',');
         getline(iss, amtStr, ',');
+        getline(iss, roomStr, ',');
 
-        // Remove quotes & spaces
+        // Remove spaces
         trimSpaces(billIdStr);
 
-        trimQuotes(nameQuoted);
         trimSpaces(nameQuoted);
 
         trimSpaces(amtStr);
+
+        trimSpaces(roomStr);
 
         try
         {
             // Convert other strings to int
             int billIdNum = stoi(billIdStr);
             int amtNum = stoi(amtStr);
+            int roomNo = stoi(roomStr);
 
             i = billIdNum - 1;
 
@@ -400,6 +380,7 @@ void Storable::fromString_roomBill()
             billId[i] = billIdNum;
             name[i] = nameQuoted;
             amt[i] = amtNum;
+            roomNum[i] = roomNo;
         }
         catch (const exception &e)
         {

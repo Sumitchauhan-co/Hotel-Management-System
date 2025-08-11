@@ -81,7 +81,6 @@ void Customer::display()
 
             transform(lower_name.begin(), lower_name.end(), lower_name.begin(), ::tolower);
 
-            cout<<roomNum[i]<<customer_room<<" "<<lower_name<<customer_name<<endl;    //error check
             if (roomNum[i] == customer_room && lower_name == customer_name)
             {
                 cout << left << setw(20) << name[i]
