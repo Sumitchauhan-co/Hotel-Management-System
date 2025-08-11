@@ -199,7 +199,7 @@ void Booking::food()
                     cout << "\nYour request has accepted and your " << item << " is getting ready, it will be delivered soon...";
 
                     itemQty[i] -= qty;
-                    orderedQty[i] += qty;
+                    orderedQty[i] = qty;
                     sold[i] = "sold";
                     
                     found = true;
