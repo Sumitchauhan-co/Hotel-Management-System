@@ -194,7 +194,7 @@ void Booking::food()
 
                 transform(choice.begin(), choice.end(), choice.begin(), ::tolower);
 
-                if (choice == "yes")
+                if (choice == "yes" && itemQty[i] - qty >=0)
                 {
                     cout << "\nYour request has accepted and your " << item << " is getting ready, it will be delivered soon...";
 
