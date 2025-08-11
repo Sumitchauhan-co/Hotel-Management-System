@@ -71,7 +71,7 @@ void Storable::toString_room()
 
 void Storable::toString_orderBill()
 {
-    ofstream out("files.txt/order.txt", ios::app);
+    ofstream out("files.txt/order.txt", ios::trunc);
 
     for (size_t i = 0; i < itemName.size(); i++)
     {
@@ -291,6 +291,7 @@ void Storable::fromString_orderBill()
     }
 
     string line;
+    int i=0;
 
     while (getline(in, line))
     {
@@ -300,12 +301,14 @@ void Storable::fromString_orderBill()
         }
 
         istringstream iss(line); // inputs each line
-        string itemQuoted, priceStr, orderedStr;
+        string itemQuoted, priceStr, orderedStr ,qtyStr, soldQuoted;
 
         // Read comma-separated values
         getline(iss, itemQuoted, ',');
         getline(iss, priceStr, ',');
         getline(iss, orderedStr, ',');
+        getline(iss, qtyStr, ',');
+        getline(iss, soldQuoted, ',');
 
         // Remove spaces
         trimSpaces(itemQuoted);
@@ -314,9 +317,12 @@ void Storable::fromString_orderBill()
 
         trimSpaces(orderedStr);
 
+        trimSpaces(qtyStr);
+
+        trimSpaces(soldQuoted);
+
         if (!itemQuoted.empty())
         {
-            // Match with default list
             for (size_t i = 0; i < itemName.size(); i++)
             {
                 if (itemName[i] == itemQuoted)
@@ -326,6 +332,28 @@ void Storable::fromString_orderBill()
                 }
             }
         }
+
+        try
+        {
+            // Convert other strings to int
+            int price = stoi(priceStr);
+            int ordered = stoi(orderedStr);
+            int qty = stoi(qtyStr);
+
+            // Push to vectors
+            itemName[i] = itemQuoted;
+            itemPrice[i] = price;
+            orderedQty[i] = ordered;
+            itemQty[i] = qty;
+            sold[i] = soldQuoted;
+        }
+        catch (const exception &e)
+        {
+            cout << "Skipping bad data: " << e.what() << " in line: " << line << "\n";
+            continue;
+        }
+
+        i++;
     }
     in.close();
 }
