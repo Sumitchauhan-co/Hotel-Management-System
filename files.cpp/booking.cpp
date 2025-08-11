@@ -200,7 +200,7 @@ void Booking::food()
 
                     itemQty[i] -= qty;
                     orderedQty[i] = qty;
-                    sold[i] = "sold";
+                    sold[i] = "Sold";
                     
                     found = true;
                     break;
