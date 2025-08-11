@@ -201,6 +201,7 @@ void Booking::food()
                     itemQty[i] -= qty;
                     orderedQty[i] = qty;
                     sold[i] = "Sold";
+                    cout<<i<<":"<<sold[i]<<endl;
                     
                     found = true;
                     break;
