@@ -1,2 +1,0 @@
-sumit , 98 , s9 , 1
-pathik , 98 , p2 , 3

@@ -45,7 +45,7 @@ void Storable::toString_customer()
             out << name[i] << " , "
                 << contact[i] << " , "
                 << ID[i] << " , "
-                << roomNum[i] << "\n";
+                << roomNum[i] << "\n"; 
         }
     }
     out.close();
@@ -98,7 +98,7 @@ void Storable::toString_roomBill()
             out << to_string(billId[i]) << " , "
                 << name[i] << " , "
                 << to_string(amt[i]) << " , "
-                << to_string(roomNum[i]) << "\n";
+                << to_string(roomNum[i]) << "\n"; 
         }
     }
     out.close();
@@ -138,8 +138,9 @@ auto trimQuotes = [](string &s)
 auto trimSpaces = [](string &s)
 {
     auto pos1 = s.find_first_not_of(" \t");
-    if (pos1 != string::npos){
-        s.erase(0, pos1);   // remove leading spaces or tab
+    if (pos1 != string::npos)
+    {
+        s.erase(0, pos1); // remove leading spaces or tab
     }
     else
     {
@@ -148,8 +149,9 @@ auto trimSpaces = [](string &s)
     }
 
     auto pos2 = s.find_last_not_of(" \t");
-    if (pos2 != string::npos){
-        s.erase(pos2 + 1);   // remove trailing spaces or tab
+    if (pos2 != string::npos)
+    {
+        s.erase(pos2 + 1); // remove trailing spaces or tab
     }
     else
     {
@@ -168,7 +170,7 @@ void Storable::fromString_customer()
     }
 
     string line;
-    int i = 0;
+    int i;
 
     while (getline(in, line))
     {
@@ -201,13 +203,13 @@ void Storable::fromString_customer()
             // Convert other strings to int
             int room = stoi(roomStr);
 
+            i = room - 1;
+
             // Push to vectors
             name[i] = nameQuoted;
             contact[i] = contactStr;
             ID[i] = idStr;
             roomNum[i] = room;
-
-            i++;
         }
         catch (const exception &e)
         {
@@ -228,7 +230,7 @@ void Storable::fromString_room()
     }
 
     string line;
-    int i = 0;
+    int i;
 
     while (getline(in, line))
     {
@@ -279,6 +281,8 @@ void Storable::fromString_room()
             int costNum = stoi(costStr);
             int durationNum = stoi(durationStr);
 
+            i = roomNo - 1;
+
             // Push to vectors
             Ac[i] = acQuoted;
             foodService[i] = foodQuoted;
@@ -288,8 +292,6 @@ void Storable::fromString_room()
             roomNum[i] = roomNo;
             cost[i] = costNum;
             duration[i] = durationNum;
-
-            i++;
         }
         catch (const exception &e)
         {
@@ -361,7 +363,7 @@ void Storable::fromString_roomBill()
     }
 
     string line;
-    int i = 0;
+    int i;
 
     while (getline(in, line))
     {
@@ -392,12 +394,12 @@ void Storable::fromString_roomBill()
             int billIdNum = stoi(billIdStr);
             int amtNum = stoi(amtStr);
 
+            i = billIdNum - 1;
+
             // Push to vectors
             billId[i] = billIdNum;
             name[i] = nameQuoted;
             amt[i] = amtNum;
-
-            i++;
         }
         catch (const exception &e)
         {

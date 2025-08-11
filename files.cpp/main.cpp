@@ -13,14 +13,14 @@ int main()
 {
     Storable s;
 
-    if (s.fileNotEmpty("files.txt/customer.txt"))
-    {
-        s.fromString_customer();
-    }
-
     if (s.fileNotEmpty("files.txt/room.txt"))
     {
         s.fromString_room();
+    }
+
+    if (s.fileNotEmpty("files.txt/customer.txt"))
+    {
+        s.fromString_customer();
     }
 
     if (s.fileNotEmpty("files.txt/order.txt"))
