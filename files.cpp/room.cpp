@@ -69,7 +69,7 @@ void Room::getdata_room()
 
 void Room::display_room()
 {
-    int customer_room;
+    size_t customer_room;
     int time;
     string ss;
     char option;
