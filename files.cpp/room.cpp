@@ -154,7 +154,7 @@ void Room::display_room()
         else
         {
             for(size_t i=0; i<roomNum.size(); i++){
-                if(booked[i] =="No booking yet"){
+                if(booked[i] =="No booking yet" && i>customer_room-1){
                     customer_room = i+1;
                     break;
                 }
