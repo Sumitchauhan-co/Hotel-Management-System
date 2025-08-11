@@ -146,7 +146,7 @@ void Storable::fromString_customer()
         getline(iss, idStr, ',');
         getline(iss, roomStr);
 
-        // Remove quotes from name
+        // Remove quotes
         if (nameQuoted.front() == '"')
         {
             nameQuoted.erase(0, 1);
@@ -208,6 +208,52 @@ void Storable::fromString_room()
         getline(iss, bookedQuoted, ',');
         getline(iss, durationStr, ',');
         getline(iss, specialQuoted);
+
+        // Remove quotes
+        if (acQuoted.front() == '"')
+        {
+            acQuoted.erase(0, 1);
+        }
+        if (acQuoted.back() == '"')
+        {
+            acQuoted.pop_back();
+        }
+
+        if (foodQuoted.front() == '"')
+        {
+            foodQuoted.erase(0, 1);
+        }
+        if (foodQuoted.back() == '"')
+        {
+            foodQuoted.pop_back();
+        }
+
+        if (laundryQuoted.front() == '"')
+        {
+            laundryQuoted.erase(0, 1);
+        }
+        if (laundryQuoted.back() == '"')
+        {
+            laundryQuoted.pop_back();
+        }
+
+        if (bookedQuoted.front() == '"')
+        {
+            bookedQuoted.erase(0, 1);
+        }
+        if (bookedQuoted.back() == '"')
+        {
+            bookedQuoted.pop_back();
+        }
+        
+        if (specialQuoted.front() == '"')
+        {
+            specialQuoted.erase(0, 1);
+        }
+        if (specialQuoted.back() == '"')
+        {
+            specialQuoted.pop_back();
+        }
 
         try
         {
