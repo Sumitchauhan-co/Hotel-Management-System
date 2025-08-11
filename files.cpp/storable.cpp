@@ -71,7 +71,7 @@ void Storable::toString_room()
 
 void Storable::toString_orderBill()
 {
-    ofstream out("files.txt/order.txt", ios::trunc);
+    ofstream out("files.txt/order.txt", ios::app);
 
     for (size_t i = 0; i < itemName.size(); i++)
     {
