@@ -57,17 +57,14 @@ void Storable::toString_room()
 
     for (size_t i = 0; i < Ac.size(); i++)
     {
-        if (booked[i] == "Booked")
-        {
-            out << to_string(roomNum[i]) << ","
-                << "\"" << Ac[i] << "\","
-                << "\"" << foodService[i] << "\","
-                << "\"" << laundryService[i] << "\","
-                << to_string(cost[i]) << ","
-                << "\"" << booked[i] << "\","
-                << to_string(duration[i]) << ","
-                << "\"" << specialService[i] << "\"" << "\n";
-        }
+        out << to_string(roomNum[i]) << ","
+            << "\"" << Ac[i] << "\","
+            << "\"" << foodService[i] << "\","
+            << "\"" << laundryService[i] << "\","
+            << to_string(cost[i]) << ","
+            << "\"" << booked[i] << "\","
+            << to_string(duration[i]) << ","
+            << "\"" << specialService[i] << "\"" << "\n";
     }
     out.close();
 }
@@ -135,8 +132,9 @@ void Storable::fromString_customer()
 
     while (getline(in, line))
     {
-        if(line.empty()){
-            continue;  //skips empty record
+        if (line.empty())
+        {
+            continue; // skips empty record
         }
 
         istringstream iss(line);
@@ -171,7 +169,8 @@ void Storable::fromString_customer()
 
             i++;
         }
-        catch (const exception& e) {
+        catch (const exception &e)
+        {
             cout << "Skipping bad data: " << e.what() << " in line: " << line << "\n";
             continue;
         }
@@ -181,9 +180,10 @@ void Storable::fromString_customer()
 
 void Storable::fromString_room()
 {
-    getdata_room(); //sets initialisation
+    getdata_room(); // sets initialisation
     ifstream in("./files.txt/room.txt");
-    if (!in){
+    if (!in)
+    {
         return;
     }
 
@@ -192,8 +192,9 @@ void Storable::fromString_room()
 
     while (getline(in, line))
     {
-        if(line.empty()){
-            continue;  //skips empty record
+        if (line.empty())
+        {
+            continue; // skips empty record
         }
 
         istringstream iss(line);
@@ -208,28 +209,30 @@ void Storable::fromString_room()
         getline(iss, durationStr, ',');
         getline(iss, specialQuoted);
 
-        try {
+        try
+        {
             // Convert other strings to int
             int roomNo = stoi(roomNumStr);
             int costNum = stoi(costStr);
             int durationNum = stoi(durationStr);
 
             i = roomNo - 1;
-            cout<<roomNo<<endl;
+            cout << roomNo << endl;
 
             // Push to vectors
             Ac[i] = acQuoted;
             foodService[i] = foodQuoted;
             laundryService[i] = laundryQuoted;
             booked[i] = bookedQuoted;
-            cout<<i<<":"<<booked[i]<<endl;
+            cout << i << ":" << booked[i] << endl;
             specialService[i] = specialQuoted;
             roomNum[i] = roomNo;
-            cout<<i<<":"<<roomNum[i]<<endl;
+            cout << i << ":" << roomNum[i] << endl;
             cost[i] = costNum;
             duration[i] = durationNum;
         }
-        catch (const exception& e) {
+        catch (const exception &e)
+        {
             cout << "Skipping bad data: " << e.what() << " in line: " << line << "\n";
             continue;
         }
@@ -242,7 +245,8 @@ void Storable::fromString_orderBill()
     getdata_order(); // sets initialisation
     ifstream in("files.txt/order.txt");
 
-    if (!in){
+    if (!in)
+    {
         return;
     }
 
@@ -250,8 +254,9 @@ void Storable::fromString_orderBill()
 
     while (getline(in, line))
     {
-        if(line.empty()){
-            continue;  //skips empty record
+        if (line.empty())
+        {
+            continue; // skips empty record
         }
 
         istringstream iss(line);
@@ -304,7 +309,7 @@ void Storable::fromString_orderBill()
         //     continue;
         // }
 
-        string itemQuoted, priceStr, orderedStr ;
+        string itemQuoted, priceStr, orderedStr;
 
         getline(iss, itemQuoted, ',');
         getline(iss, priceStr, ',');
@@ -319,10 +324,13 @@ void Storable::fromString_orderBill()
             itemQuoted.pop_back();
         }
 
-        if (!itemQuoted.empty()) {
+        if (!itemQuoted.empty())
+        {
             // Match with default list
-            for (size_t i = 0; i < itemName.size(); i++) {
-                if (itemName[i] == itemQuoted) {
+            for (size_t i = 0; i < itemName.size(); i++)
+            {
+                if (itemName[i] == itemQuoted)
+                {
                     itemQty[i] -= stoi(orderedStr);
                     break;
                 }
@@ -336,7 +344,8 @@ void Storable::fromString_roomBill()
 {
     ifstream in("./files.txt/billManager.txt");
 
-    if (!in){
+    if (!in)
+    {
         return;
     }
 
@@ -345,8 +354,9 @@ void Storable::fromString_roomBill()
 
     while (getline(in, line))
     {
-        if(line.empty()){
-            continue;  //skips empty record
+        if (line.empty())
+        {
+            continue; // skips empty record
         }
 
         istringstream iss(line);
@@ -384,7 +394,8 @@ void Storable::fromString_roomBill()
 
             i++;
         }
-        catch (const exception& e) {
+        catch (const exception &e)
+        {
             cout << "Skipping bad data: " << e.what() << " in line: " << line << "\n";
             continue;
         }
