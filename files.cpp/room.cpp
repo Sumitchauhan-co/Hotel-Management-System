@@ -69,7 +69,7 @@ void Room::getdata_room()
 
 void Room::display_room()
 {
-    size_t customer_room;
+    int customer_room;
     int time;
     string ss;
     char option;
@@ -79,7 +79,8 @@ void Room::display_room()
         cout << "\nPlease enter your room no. : ";
         errorHandling::input(customer_room);
 
-        if(customer_room <1 || customer_room > 50) {
+        if (customer_room < 1 || customer_room > 50)
+        {
             cout << "\nInvalid room number, try again!\n";
             continue;
         }
@@ -142,7 +143,7 @@ void Room::display_room()
         cout << "\nDo you like this room? (Y/N) : ";
         errorHandling::input(option);
         option = tolower(option);
-        
+
         if (option == 'y')
         {
             booked[customer_room - 1] = "Booked";
@@ -153,9 +154,11 @@ void Room::display_room()
         }
         else
         {
-            for(size_t i=0; i<roomNum.size(); i++){
-                if(booked[i] =="No booking yet" && i>customer_room-1){
-                    customer_room = i+1;
+            for (size_t i = 0; i < roomNum.size(); i++)
+            {
+                if (booked[i] == "No booking yet" && roomNum[i] > customer_room)
+                {
+                    customer_room = roomNum[i];
                     break;
                 }
             };
@@ -182,7 +185,7 @@ void Room::display_allroom()
         {
             continue; // Skip rooms that are not booked
         }
-        
+
         cout << left << setw(15) << roomNum[i]
              << setw(10) << Ac[i]
              << setw(15) << foodService[i]
