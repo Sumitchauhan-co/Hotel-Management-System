@@ -158,6 +158,7 @@ void Room::display_room()
             {
                 if (booked[i] != "Booked" && roomNum[i] > customer_room)
                 {
+                    cout<<i<<":"<<booked[i]<<endl;
                     customer_room = roomNum[i];
                     break;
                 }
