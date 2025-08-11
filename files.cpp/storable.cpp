@@ -346,7 +346,6 @@ void Storable::fromString_orderBill()
             orderedQty[i] = ordered;
             itemQty[i] = qty;
             sold[i] = soldQuoted;
-            cout<<i<<":"<<sold[i]<<endl;
         }
         catch (const exception &e)
         {

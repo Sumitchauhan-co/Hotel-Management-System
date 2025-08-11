@@ -102,7 +102,6 @@ void Order::display_allorder()
 
     for (size_t i = 0; i < itemName.size(); i++)
     {
-        cout<<"items"<<endl;
         if(sold[i]!= "Sold")
         {
             continue; // Skip items that are not sold
