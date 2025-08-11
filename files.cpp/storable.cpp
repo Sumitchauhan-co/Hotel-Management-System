@@ -42,7 +42,7 @@ void Storable::toString_customer()
     {
         if (!name[i].empty())
         {
-            out << "\"" << name[i] << "\" , "
+            out << name[i] << " , "
                 << contact[i] << " , "
                 << ID[i] << " , "
                 << roomNum[i] << "\n";
@@ -58,13 +58,13 @@ void Storable::toString_room()
     for (size_t i = 0; i < Ac.size(); i++)
     {
         out << to_string(roomNum[i]) << " , "
-            << "\"" << Ac[i] << "\" , "
-            << "\"" << foodService[i] << "\" , "
-            << "\"" << laundryService[i] << "\" , "
+            << Ac[i] << " , "
+            << foodService[i] << " , "
+            << laundryService[i] << " , "
             << to_string(cost[i]) << " , "
-            << "\"" << booked[i] << "\" , "
+            << booked[i] << " , "
             << to_string(duration[i]) << " , "
-            << "\"" << specialService[i] << "\"\n";
+            << specialService[i] << "\n";
     }
     out.close();
 }
@@ -77,11 +77,11 @@ void Storable::toString_orderBill()
     {
         if (sold[i] == "sold" && orderedQty[i] > 0)
         {
-            out << "\"" << itemName[i] << "\" , "
+            out << itemName[i] << " , "
                 << to_string(itemPrice[i]) << " , "
                 << to_string(orderedQty[i]) << " , "
                 << to_string(itemQty[i]) << " , "
-                << "\"" << sold[i] << "\"\n";
+                << sold[i] << "\n";
         }
     }
     out.close();
@@ -96,7 +96,7 @@ void Storable::toString_roomBill()
         if (!name[i].empty())
         {
             out << to_string(billId[i]) << " , "
-                << "\"" << name[i] << "\" , "
+                << name[i] << " , "
                 << to_string(amt[i]) << " , "
                 << to_string(roomNum[i]) << "\n";
         }
@@ -113,7 +113,7 @@ void Storable::toString_feedback()
     {
         if (!fd.empty())
         {
-            out << "\"" << fd << "\"\n";
+            out << fd << "\n";
         }
     }
 }
