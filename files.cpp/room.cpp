@@ -153,7 +153,11 @@ void Room::display_room()
         }
         else
         {
-            ++customer_room;
+            for(size_t i=0; i<roomNum.size(); i++){
+                if(booked[i] !="Booked"){
+                    customer_room = i+1;
+                }
+            };
             cout << "\nYour next room : " << customer_room << endl;
             continue;
         }
