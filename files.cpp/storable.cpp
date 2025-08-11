@@ -118,6 +118,18 @@ void Storable::toString_feedback()
     }
 }
 
+auto trimQuotes = [](string &s)
+{
+    if (!s.empty() && s.front() == '"')
+    {
+        s.erase(0, 1);
+    }
+    if (!s.empty() && s.back() == '"')
+    {
+        s.pop_back();
+    }
+};
+
 void Storable::fromString_customer()
 {
     ifstream in("files.txt/customer.txt");
@@ -137,24 +149,17 @@ void Storable::fromString_customer()
             continue; // skips empty record
         }
 
-        istringstream iss(line);
+        istringstream iss(line); // inputs each line
         string nameQuoted, contactStr, idStr, roomStr;
 
         // Read comma-separated values
-        getline(iss, nameQuoted, ','); // e.g., "\""Sumit Chauhan"\""
+        getline(iss, nameQuoted, ','); 
         getline(iss, contactStr, ',');
         getline(iss, idStr, ',');
         getline(iss, roomStr);
 
         // Remove quotes
-        if (nameQuoted.front() == '"')
-        {
-            nameQuoted.erase(0, 1);
-        }
-        if (nameQuoted.back() == '"')
-        {
-            nameQuoted.pop_back();
-        }
+        trimQuotes(nameQuoted);
 
         try
         {
@@ -188,7 +193,7 @@ void Storable::fromString_room()
     }
 
     string line;
-    int i=0;
+    int i = 0;
 
     while (getline(in, line))
     {
@@ -197,9 +202,10 @@ void Storable::fromString_room()
             continue; // skips empty record
         }
 
-        istringstream iss(line);
+        istringstream iss(line); // inputs each line
         string roomNumStr, acQuoted, foodQuoted, laundryQuoted, costStr, bookedQuoted, durationStr, specialQuoted;
 
+        // Read comma-separated values
         getline(iss, roomNumStr, ',');
         getline(iss, acQuoted, ',');
         getline(iss, foodQuoted, ',');
@@ -210,50 +216,15 @@ void Storable::fromString_room()
         getline(iss, specialQuoted);
 
         // Remove quotes
-        if (acQuoted.front() == '"')
-        {
-            acQuoted.erase(0, 1);
-        }
-        if (acQuoted.back() == '"')
-        {
-            acQuoted.pop_back();
-        }
+        trimQuotes(acQuoted);
 
-        if (foodQuoted.front() == '"')
-        {
-            foodQuoted.erase(0, 1);
-        }
-        if (foodQuoted.back() == '"')
-        {
-            foodQuoted.pop_back();
-        }
+        trimQuotes(foodQuoted);
 
-        if (laundryQuoted.front() == '"')
-        {
-            laundryQuoted.erase(0, 1);
-        }
-        if (laundryQuoted.back() == '"')
-        {
-            laundryQuoted.pop_back();
-        }
+        trimQuotes(laundryQuoted);
 
-        if (bookedQuoted.front() == '"')
-        {
-            bookedQuoted.erase(0, 1);
-        }
-        if (bookedQuoted.back() == '"')
-        {
-            bookedQuoted.pop_back();
-        }
-        
-        if (specialQuoted.front() == '"')
-        {
-            specialQuoted.erase(0, 1);
-        }
-        if (specialQuoted.back() == '"')
-        {
-            specialQuoted.pop_back();
-        }
+        trimQuotes(bookedQuoted);
+
+        trimQuotes(specialQuoted);
 
         try
         {
@@ -302,70 +273,16 @@ void Storable::fromString_orderBill()
             continue; // skips empty record
         }
 
-        istringstream iss(line);
-        // string itemQuoted, soldQuoted, priceStr, orderedStr, qtyStr;
-
-        // // Read comma-separated values
-        // getline(iss, itemQuoted, ',');
-        // getline(iss, priceStr, ',');
-        // getline(iss, orderedStr, ',');
-        // getline(iss, qtyStr, ',');
-        // getline(iss, soldQuoted);
-
-        // // Remove quotes from name
-        // if (itemQuoted.front() == '"')
-        // {
-        //     itemQuoted.erase(0, 1);
-        // }
-        // if (itemQuoted.back() == '"')
-        // {
-        //     itemQuoted.pop_back();
-        // }
-
-        // if (soldQuoted.front() == '"')
-        // {
-        //     soldQuoted.erase(0, 1);
-        // }
-        // if (soldQuoted.back() == '"')
-        // {
-        //     soldQuoted.pop_back();
-        // }
-
-        // try
-        // {
-        //     // Convert other strings to int
-        //     int priceNum = stoi(priceStr);
-        //     int orderedNum = stoi(orderedStr);
-        //     int qtyNum = stoi(qtyStr);
-
-        //     // Push to vectors
-        //     itemName[i] = itemQuoted;
-        //     itemPrice[i] = priceNum;
-        //     orderedQty[i] = orderedNum;
-        //     itemQty[i] = qtyNum;
-        //     sold[i] = soldQuoted;
-
-        //     i++;
-        // }
-        // catch (const exception& e) {
-        //     cout << "Skipping bad data: " << e.what() << " in line: " << line << "\n";
-        //     continue;
-        // }
-
+        istringstream iss(line); // inputs each line
         string itemQuoted, priceStr, orderedStr;
 
+        // Read comma-separated values
         getline(iss, itemQuoted, ',');
         getline(iss, priceStr, ',');
         getline(iss, orderedStr, ',');
 
-        if (itemQuoted.front() == '"')
-        {
-            itemQuoted.erase(0, 1);
-        }
-        if (itemQuoted.back() == '"')
-        {
-            itemQuoted.pop_back();
-        }
+        // Remove quotes
+        trimQuotes(itemQuoted);
 
         if (!itemQuoted.empty())
         {
@@ -402,24 +319,16 @@ void Storable::fromString_roomBill()
             continue; // skips empty record
         }
 
-        istringstream iss(line);
-        string billIdStr, amtStr;
-        string nameQuoted;
+        istringstream iss(line); // inputs each line
+        string billIdStr, amtStr, nameQuoted;
 
         // Read comma-separated values
         getline(iss, billIdStr, ',');
         getline(iss, nameQuoted, ',');
         getline(iss, amtStr, ',');
 
-        // Remove quotes from name
-        if (nameQuoted.front() == '"')
-        {
-            nameQuoted.erase(0, 1);
-        }
-        if (nameQuoted.back() == '"')
-        {
-            nameQuoted.pop_back();
-        }
+        // Remove quotes
+        trimQuotes(nameQuoted);
 
         try
         {
