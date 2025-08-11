@@ -267,10 +267,8 @@ void Storable::fromString_room()
             foodService[i] = foodQuoted;
             laundryService[i] = laundryQuoted;
             booked[i] = bookedQuoted;
-            cout << i << ":" << booked[i] << endl;
             specialService[i] = specialQuoted;
             roomNum[i] = roomNo;
-            cout << i << ":" << roomNum[i] << endl;
             cost[i] = costNum;
             duration[i] = durationNum;
 
