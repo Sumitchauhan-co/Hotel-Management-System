@@ -156,7 +156,7 @@ void Room::display_room()
         {
             for (size_t i = 0; i < roomNum.size(); i++)
             {
-                if (booked[i] == "No booking yet" && roomNum[i] > customer_room)
+                if (booked[i] != "Booked" && roomNum[i] > customer_room)
                 {
                     customer_room = roomNum[i];
                     break;

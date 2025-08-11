@@ -64,7 +64,7 @@ void Storable::toString_room()
             << to_string(cost[i]) << ","
             << "\"" << booked[i] << "\","
             << to_string(duration[i]) << ","
-            << "\"" << specialService[i] << "\"" << "\n";
+            << "\"" << specialService[i] << "\"\n";
     }
     out.close();
 }
@@ -97,8 +97,8 @@ void Storable::toString_roomBill()
         {
             out << to_string(billId[i]) << ","
                 << "\"" << name[i] << "\","
-                << to_string(roomNum[i]) << ","
-                << to_string(amt[i]) << "\n";
+                << to_string(amt[i]) << ","
+                << to_string(roomNum[i]) << "\n";
         }
     }
     out.close();
@@ -188,7 +188,7 @@ void Storable::fromString_room()
     }
 
     string line;
-    int i;
+    int i=0;
 
     while (getline(in, line))
     {
@@ -216,9 +216,6 @@ void Storable::fromString_room()
             int costNum = stoi(costStr);
             int durationNum = stoi(durationStr);
 
-            i = roomNo - 1;
-            cout << roomNo << endl;
-
             // Push to vectors
             Ac[i] = acQuoted;
             foodService[i] = foodQuoted;
@@ -230,6 +227,8 @@ void Storable::fromString_room()
             cout << i << ":" << roomNum[i] << endl;
             cost[i] = costNum;
             duration[i] = durationNum;
+
+            i++;
         }
         catch (const exception &e)
         {
@@ -360,14 +359,13 @@ void Storable::fromString_roomBill()
         }
 
         istringstream iss(line);
-        string billIdStr, roomStr, amtStr;
+        string billIdStr, amtStr;
         string nameQuoted;
 
         // Read comma-separated values
         getline(iss, billIdStr, ',');
         getline(iss, nameQuoted, ',');
-        getline(iss, roomStr, ',');
-        getline(iss, amtStr);
+        getline(iss, amtStr, ',');
 
         // Remove quotes from name
         if (nameQuoted.front() == '"')
@@ -383,13 +381,11 @@ void Storable::fromString_roomBill()
         {
             // Convert other strings to int
             int billIdNum = stoi(billIdStr);
-            int roomNo = stoi(roomStr);
             int amtNum = stoi(amtStr);
 
             // Push to vectors
             billId[i] = billIdNum;
             name[i] = nameQuoted;
-            roomNum[i] = roomNo;
             amt[i] = amtNum;
 
             i++;
