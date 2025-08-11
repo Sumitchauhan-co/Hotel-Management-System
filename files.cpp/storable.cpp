@@ -42,9 +42,9 @@ void Storable::toString_customer()
     {
         if (!name[i].empty())
         {
-            out << "\"" << name[i] << "\","
-                << contact[i] << ","
-                << ID[i] << ","
+            out << "\"" << name[i] << "\" , "
+                << contact[i] << " , "
+                << ID[i] << " , "
                 << roomNum[i] << "\n";
         }
     }
@@ -57,13 +57,13 @@ void Storable::toString_room()
 
     for (size_t i = 0; i < Ac.size(); i++)
     {
-        out << to_string(roomNum[i]) << ","
-            << "\"" << Ac[i] << "\","
-            << "\"" << foodService[i] << "\","
-            << "\"" << laundryService[i] << "\","
-            << to_string(cost[i]) << ","
-            << "\"" << booked[i] << "\","
-            << to_string(duration[i]) << ","
+        out << to_string(roomNum[i]) << " , "
+            << "\"" << Ac[i] << "\" , "
+            << "\"" << foodService[i] << "\" , "
+            << "\"" << laundryService[i] << "\" , "
+            << to_string(cost[i]) << " , "
+            << "\"" << booked[i] << "\" , "
+            << to_string(duration[i]) << " , "
             << "\"" << specialService[i] << "\"\n";
     }
     out.close();
@@ -77,10 +77,10 @@ void Storable::toString_orderBill()
     {
         if (sold[i] == "sold" && orderedQty[i] > 0)
         {
-            out << "\"" << itemName[i] << "\","
-                << to_string(itemPrice[i]) << ","
-                << to_string(orderedQty[i]) << ","
-                << to_string(itemQty[i]) << ","
+            out << "\"" << itemName[i] << "\" , "
+                << to_string(itemPrice[i]) << " , "
+                << to_string(orderedQty[i]) << " , "
+                << to_string(itemQty[i]) << " , "
                 << "\"" << sold[i] << "\"\n";
         }
     }
@@ -95,9 +95,9 @@ void Storable::toString_roomBill()
     {
         if (!name[i].empty())
         {
-            out << to_string(billId[i]) << ","
-                << "\"" << name[i] << "\","
-                << to_string(amt[i]) << ","
+            out << to_string(billId[i]) << " , "
+                << "\"" << name[i] << "\" , "
+                << to_string(amt[i]) << " , "
                 << to_string(roomNum[i]) << "\n";
         }
     }
@@ -118,16 +118,43 @@ void Storable::toString_feedback()
     }
 }
 
-// lamda function for treaming input strings
+// lamda function for treaming quotes in input strings
 auto trimQuotes = [](string &s)
 {
-    if (!s.empty() && s.front() == '"')
+    if (!s.empty())
     {
-        s.erase(0, 1);
+        if (s.front() == '"')
+        {
+            s.erase(0, 1);
+        }
+        if (s.back() == '"')
+        {
+            s.pop_back();
+        }
     }
-    if (!s.empty() && s.back() == '"')
+};
+
+// lamda function for treaming spaces in input strings
+auto trimSpaces = [](string &s)
+{
+    auto pos1 = s.find_first_not_of(" \t");
+    if (pos1 != string::npos){
+        s.erase(0, pos1);   // remove leading spaces or tab
+    }
+    else
     {
-        s.pop_back();
+        s.clear();
+        return;
+    }
+
+    auto pos2 = s.find_last_not_of(" \t");
+    if (pos2 != string::npos){
+        s.erase(pos2 + 1);   // remove trailing spaces or tab
+    }
+    else
+    {
+        s.clear();
+        return;
     }
 };
 
@@ -154,13 +181,20 @@ void Storable::fromString_customer()
         string nameQuoted, contactStr, idStr, roomStr;
 
         // Read comma-separated values
-        getline(iss, nameQuoted, ','); 
+        getline(iss, nameQuoted, ',');
         getline(iss, contactStr, ',');
         getline(iss, idStr, ',');
         getline(iss, roomStr);
 
-        // Remove quotes
+        // Remove quotes & spaces
         trimQuotes(nameQuoted);
+        trimSpaces(nameQuoted);
+
+        trimSpaces(contactStr);
+
+        trimSpaces(idStr);
+
+        trimSpaces(roomStr);
 
         try
         {
@@ -216,16 +250,27 @@ void Storable::fromString_room()
         getline(iss, durationStr, ',');
         getline(iss, specialQuoted);
 
-        // Remove quotes
+        // Remove quotes & spaces
+        trimSpaces(roomNumStr);
+
         trimQuotes(acQuoted);
+        trimSpaces(acQuoted);
 
         trimQuotes(foodQuoted);
+        trimSpaces(foodQuoted);
 
         trimQuotes(laundryQuoted);
+        trimSpaces(laundryQuoted);
+
+        trimSpaces(costStr);
 
         trimQuotes(bookedQuoted);
+        trimSpaces(bookedQuoted);
+
+        trimSpaces(durationStr);
 
         trimQuotes(specialQuoted);
+        trimSpaces(specialQuoted);
 
         try
         {
@@ -282,8 +327,13 @@ void Storable::fromString_orderBill()
         getline(iss, priceStr, ',');
         getline(iss, orderedStr, ',');
 
-        // Remove quotes
+        // Remove quotes & spaces
         trimQuotes(itemQuoted);
+        trimSpaces(itemQuoted);
+
+        trimSpaces(priceStr);
+
+        trimSpaces(orderedStr);
 
         if (!itemQuoted.empty())
         {
@@ -328,8 +378,13 @@ void Storable::fromString_roomBill()
         getline(iss, nameQuoted, ',');
         getline(iss, amtStr, ',');
 
-        // Remove quotes
+        // Remove quotes & spaces
+        trimSpaces(billIdStr);
+
         trimQuotes(nameQuoted);
+        trimSpaces(nameQuoted);
+
+        trimSpaces(amtStr);
 
         try
         {
