@@ -9,7 +9,7 @@ void Booking::entry()
 {
     for (size_t i = 0; i < roomNum.size(); i++)
     {
-        if (booked[i] == "No booking yet")
+        if (booked[i] != "Booked")
         {
             cout<<i<<":"<<booked[i]<<endl;
             cout<<i<<":"<<roomNum[i]<<endl;
