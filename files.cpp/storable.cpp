@@ -75,7 +75,7 @@ void Storable::toString_orderBill()
 
     for (size_t i = 0; i < itemName.size(); i++)
     {
-        if (sold[i] == "sold" && orderedQty[i] > 0)
+        if (sold[i] == "Sold" && orderedQty[i] > 0)
         {
             out << itemName[i] << " , "
                 << to_string(itemPrice[i]) << " , "
