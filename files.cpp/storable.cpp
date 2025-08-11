@@ -118,6 +118,7 @@ void Storable::toString_feedback()
     }
 }
 
+// lamda function for treaming input strings
 auto trimQuotes = [](string &s)
 {
     if (!s.empty() && s.front() == '"')
