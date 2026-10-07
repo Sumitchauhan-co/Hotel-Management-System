@@ -71,8 +71,8 @@ void BillManager::bill_room()
                 cout << "\nSpecial Service  : " << specialService[i];
                 cout << "\nTotal Charge     : Rs" << total_charge;
                 cout << "\nDiscount (15%)   : Rs" << discount_amt;
-                cout << "\nGST (18%)        : RS" << gst_amt;
-                cout << "\nFinal Amount     : RS" << final_amt << "\n";
+                cout << "\nGST (18%)        : Rs" << gst_amt;
+                cout << "\nFinal Amount     : Rs" << final_amt << "\n";
                 
                 found = true;
                 break;

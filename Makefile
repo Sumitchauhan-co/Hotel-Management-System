@@ -1,6 +1,5 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -I./files.h
-vpath %.cpp files.cpp
 
 SRC = \
     files.cpp/main.cpp \
@@ -14,15 +13,15 @@ SRC = \
     files.cpp/storable.cpp 
 
 OBJ = $(SRC:.cpp=.o)
-TARGET = hotel_app
+TARGET = hotel_app.exe
 
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) -o $@ $^
 
-%.o: %.cpp
+files.cpp/%.o: files.cpp/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+	del /f /q files.cpp\*.o $(TARGET) 2>nul || rm -f $(OBJ) $(TARGET)
