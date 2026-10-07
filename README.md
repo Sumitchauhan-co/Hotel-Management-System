@@ -8,32 +8,47 @@ The application provides a command-line interface (CLI) where users can perform 
 
 ---
 
+```mermaid
+graph TD
+    Application -.->|References| Storable
+    Storable ==>|Inherits| BillManager
+    BillManager ==>|Inherits| Booking
+    Booking ==>|Inherits| Room
+    Booking ==>|Inherits| Order
+    Room ==>|Inherits| Customer
+```
+
 ## 🚀 Features
 
 ### 👥 Customer Management
+
 - Add customer details with ID, contact, and name
 - Link customers with room numbers
 - Search and verify customers
 
 ### 🏠 Room Management
+
 - Initialize 50 rooms with varying services (AC, laundry, food, special)
 - Book and pre-book rooms based on preferences
 - Mark room availability and booking status
 - Display room information on demand
 
 ### 🍔 Food Ordering
+
 - 50+ food items with default quantity and pricing
 - Item-price management via map and vectors
 - Order validation with quantity check
 - Bill generation based on selected items
 
 ### 💳 Billing System
+
 - Calculate room cost with services, GST, and discount
 - Auto-generate order bills and final receipts
 - Link bill to room and customer
 - Maintain bill history in external files
 
 ### 💾 Data Persistence
+
 - Use file I/O to serialize customer, room, and bill data
 - Load saved data on app launch via `LoadData` class
 - Append-mode writing to preserve past entries
@@ -63,10 +78,10 @@ project/
 
 ## 🛠️ Technologies
 
-- **Language:** C++17  
-- **OOP Concepts:** Inheritance, Encapsulation, Polymorphism  
-- **Data Storage:** Text file I/O  
-- **Build System:** Manual or via Makefile  
+- **Language:** C++17
+- **OOP Concepts:** Inheritance, Encapsulation, Polymorphism
+- **Data Storage:** Text file I/O
+- **Build System:** Manual or via Makefile
 - **IDE/Tools:** Visual Studio Code, g++
 
 ---
@@ -79,6 +94,7 @@ mingw32-make       //This will compile all the .cpp files listed under SRC and p
 ```
 
 To clean up build files:
+
 ```bash
 mingw32-make clean
 ```

@@ -66,14 +66,14 @@ void BillManager::bill_room()
                 cout << "\nRoom No          : " << roomNum[i];
                 cout << "\nDuration         : " << duration[i] << " days";
                 cout << "\nBase Charge      : Rs" << cost[i] * duration[i];
-                cout << "\nFood Service     : " << foodService[i];
-                cout << "\nLaundry Service  : " << laundryService[i];
-                cout << "\nSpecial Service  : " << specialService[i];
+                cout << "\nFood Service     : " << foodService[i] << "(Rs.150 per day)";
+                cout << "\nLaundry Service  : " << laundryService[i] << "(Rs.50 per day)";
+                cout << "\nSpecial Service  : " << specialService[i] << "(Rs.300)";
                 cout << "\nTotal Charge     : Rs" << total_charge;
                 cout << "\nDiscount (15%)   : Rs" << discount_amt;
                 cout << "\nGST (18%)        : Rs" << gst_amt;
                 cout << "\nFinal Amount     : Rs" << final_amt << "\n";
-                
+
                 found = true;
                 break;
             }
